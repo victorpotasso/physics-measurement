@@ -1,0 +1,112 @@
+////////////////
+// BUILD GRID //
+////////////////
+
+GRID_DEBUG = true
+
+build-grid(p_id, p_columns, p_width, p_query)
+	container-fluid
+		@media p_query
+			container-fixed()
+
+	row
+		@media p_query
+			make-row()
+
+	container
+		@media p_query
+			container-fixed()
+			width: p_width
+
+	@media p_query
+		make-grid(p_id, p_columns)
+		make-grid-columns(p_id, p_columns)
+
+/////////////////
+// Grid system //
+/////////////////
+
+// Create grid for specific class
+make-grid(p_id, p_columns)
+	float-grid-columns(p_id, p_columns)
+	calc-grid-columns(p_id, 'width',  p_columns)
+	calc-grid-columns(p_id, 'pull',   p_columns)
+	calc-grid-columns(p_id, 'push',   p_columns)
+	calc-grid-columns(p_id, 'offset', p_columns)
+
+make-grid-columns(p_id, p_columns)
+	for index in (1..p_columns)
+		.col-{p_id}-{index}
+			position: relative
+			min-height: 1px
+
+float-grid-columns(p_id, p_columns)
+	for index in (1..p_columns)
+		.col-{p_id}-{index}
+			float: left
+
+calc-grid-columns(p_id, p_type, p_columns)
+
+	for i in (1..p_columns)
+		percentage = ((100 * i)/p_columns)%
+
+		if i > 1
+			.col-{p_id}-{i}
+				width: percentage
+
+		if p_type is 'push' and i > 1
+			.col-{p_id}-{p_type}-{i}
+				left: percentage
+
+		if p_type is 'pull' and i > 1
+			.col-{p_id}-{p_type}-{i}
+				right: percentage
+
+		if p_type is 'pull' and i is 1
+			.col-{p_id}-{p_type}-0
+				right: auto
+
+		if p_type is 'offset'
+			.col-{p_id}-{p_type}-{i}
+				margin-left: percentage
+
+		if i is p_columns and GRID_DEBUG
+			.col-{p_id}-{i}
+				debug(p_id)
+
+// Centered container element
+container-fixed()
+	margin-right: auto
+	margin-left: auto
+	@extend .clearfix
+
+// Creates a wrapper for a series of columns
+make-row()
+	@extend .clearfix
+
+//clearfix mixin
+.clearfix
+	zoom: 1
+	&:before, &:after
+		display: table
+		content: ""
+		line-height: 0
+	&:after
+		clear: both
+
+///////////
+// DEBUG //
+///////////
+debug(p_value)
+	&:after
+		content: p_value
+		font-size: 20px
+		background-color: #fff
+		border: 1px solid red
+		padding: 10px
+		border-radius: 5px
+		color: red
+		font-weight: bold
+		position: absolute
+		top: 50%
+		left: 50%

@@ -1,0 +1,26 @@
+{
+        "name": "physics-measurement",
+        "version": "0.1.0",
+        "author": "Victor Potasso <victorpotasso@gmail.com> (http://www.victorpotasso.com/)",
+        "repository": {
+        "type": "git",
+        "url": "git://github.com/victorpotasso/physics-measurement.git"
+    },
+
+    "bugs": {
+    " url": "https://github.com/victorpotasso/physics-measurement/issues"
+    },
+
+    "licenses": [
+        {
+        "type": "MIT",
+        "url": "https://github.com/victorpotasso/physics-measurement/blob/master/LICENSE"
+        }
+    ],
+    "devDependencies": {
+        "grunt": "^0.4.5",
+        "grunt-contrib-stylus": "^0.19.0",
+        "grunt-contrib-coffee": "^0.11.1",
+        "grunt-contrib-watch": "^0.6.1"
+    }
+}

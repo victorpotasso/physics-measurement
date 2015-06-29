@@ -1,0 +1,14 @@
+// IMPORT GRID
+@import "./Grid.styl"
+
+// REGISTER GRIDS
+mobile = "only screen and (max-width: 640px)"
+tablet = "only screen and (min-width: 641px) and (max-width: 800px)"
+desktop = "only screen and (min-width: 801px) and (max-width: 1280px)"
+desktop-large = "only screen and (min-width: 1280px)"
+
+// BUILD GRIDS
+build-grid('m',  6,  100%,   mobile)
+build-grid('ds', 12, 100%,   tablet)
+build-grid('dm', 12, 100%,   desktop)
+build-grid('dl', 12, 1280px, desktop-large)
