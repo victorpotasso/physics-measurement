@@ -13,10 +13,10 @@ class Main
         # console.log 'Conversion result', measurement.convertFromTo( 2, "km",  "nm")
         # console.log 'Conversion result', measurement.convertFromTo( 15000, "nm",  "km")
 
-        $("#convert-}button").on "click", ->
-            console.log("button clicked!")
+        $("button").click(@convert)
 
     convert:(p_event)->
-        console.log "test", $(this)
+        console.log "FORM", p_event
+        p_event.preventDefault()
 
 new Main()
