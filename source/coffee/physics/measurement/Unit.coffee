@@ -20,17 +20,20 @@ class Unit
         @_list['s']  = new Base(1, "second", "s", BaseQuantity.TIME)
         @_list['g']  = new Base(1, "gram", "g", BaseQuantity.MASS)
 
+        # length
+        for k,v of SIUnitPrefix.instance().selectAll()
+            @_list["#{v.symbol()}m"]  = new Base(v.factor(), "#{v.prefix()}meter",  "#{v.symbol()}m", BaseQuantity.LENGTH)
+
+        # mass
+        for k,v of SIUnitPrefix.instance().selectAll()
+            @_list["#{v.symbol()}g"]  = new Base(v.factor(), "#{v.prefix()}gram",  "#{v.symbol()}g", BaseQuantity.MASS)
+
         # time
         @_list['min']    = new Base(60, "minute", "min", BaseQuantity.TIME)
         @_list['hour']  = new Base(3600, "hour", "hour", BaseQuantity.TIME)
 
-        # length
-        for k1,v1 of SIUnitPrefix.instance().selectAll()
-            @_list["#{v1.symbol()}m"]  = new Base(v1.factor(), "#{v1.prefix()}meter",  "#{v1.symbol()}m", BaseQuantity.LENGTH)
-
-        # mass
-        for k2,v2 of SIUnitPrefix.instance().selectAll()
-            @_list["#{v2.symbol()}g"]  = new Base(v2.factor(), "#{v2.prefix()}gram",  "#{v2.symbol()}g", BaseQuantity.MASS)
+        for k,v of SIUnitPrefix.instance().selectAll()
+            @_list["#{v.symbol()}s"]  = new Base(v.factor(), "#{v.prefix()}second",  "#{v.symbol()}s", BaseQuantity.TIME)
 
         # english units
         @_list['ft'] = new Base(0.3048, "foot", "ft", BaseQuantity.LENGTH)
