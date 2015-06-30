@@ -31,6 +31,6 @@ class Main
         q = new Quantity(data.fromValue, data.fromUnit)
         result = q.to(data.toUnit)
 
-        alert "result: #{result}"
+        $('#result').text("Result: #{data.fromValue} #{data.fromUnit} to #{data.toUnit} is equal to #{result}")
 
 new Main()

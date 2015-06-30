@@ -350,7 +350,7 @@
       });
       q = new Quantity(data.fromValue, data.fromUnit);
       result = q.to(data.toUnit);
-      return alert("result: " + result);
+      return $('#result').text("Result: " + data.fromValue + " " + data.fromUnit + " to " + data.toUnit + " is equal to " + result);
     };
 
     return Main;
