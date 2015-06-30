@@ -4,18 +4,46 @@ class BaseQuantity
     @TIME: "time"
     @LENGTH: "length"
 
-    _quantity:null
-    _unit:null
+    _instance = null
+    _list = null
 
-    constructor : (p_quantity, p_unit) ->
-        @_quantity = p_quantity
-        @_unit = p_unit
+    @instance:() ->
+          @_instance ?= new @(arguments...)
 
-    quantity:()->
-        return @_quantity
+    constructor:()->
+        @_build()
 
-    unit:()->
-        return @_unit
+    _build:()->
+        @_list = []
+        @_list["m"] = new Base(BaseQuantity.LENGTH, Unit.instance().select('m'))
+        @_list["s"]  = new Base(BaseQuantity.TIME,       Unit.instance().select('s'))
+        @_list["g"] = new Base(BaseQuantity.MASS,      Unit.instance().select('g'))
 
-    isEqual:(p_baseQuantity)->
-        return p_baseQuantity.quantity() is @_baseQuantity and p_baseQuantity.unit() is @_unit
+    select:(p_name)->
+        p = @_list[p_name]
+        return if p isnt null and p isnt undefined then p else throw new Error("Unit::prefix Error: There is no unit called '#{p_name}'.")
+
+    selectAll:()->
+        return @_list
+
+    isBase:(p_unit)->
+        return if @_list[p_unit] then @_list[p_unit] else false
+
+    #
+    ## Base
+    #
+
+    class Base
+
+        _quantity:null
+        _unit:null
+
+        constructor : (p_quantity, p_unit) ->
+            @_quantity = p_quantity
+            @_unit = p_unit
+
+        quantity:()->
+            return @_quantity
+
+        unit:()->
+            return @_unit

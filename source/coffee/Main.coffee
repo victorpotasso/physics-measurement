@@ -1,22 +1,36 @@
-#import physics.measurement.Measurement
+#import physics.measurement.Unit
+#import physics.measurement.Quantity
 
 class Main
 
+    measurement = null
+
     constructor:()->
-        console.log "--- Physics Measurement ---"
+        console.log "--- Physics Measurement by Victor Potasso ---"
+        @_build()
 
-        measurement = new Measurement()
-        # console.log 'Conversion result', measurement.convertFromTo( 3, "ft",  "m")
-        # console.log 'Conversion result', measurement.convertFromTo( 65, "min",  "s")
-        # console.log 'Conversion result', measurement.convertFromTo( 5, "km",  "m")
-        # console.log 'Conversion result', measurement.convertFromTo( 980, "m",  "km")
-        # console.log 'Conversion result', measurement.convertFromTo( 2, "km",  "nm")
-        # console.log 'Conversion result', measurement.convertFromTo( 15000, "nm",  "km")
+    _build:()->
 
-        $("button").click(@convert)
+        # fill select inputs
+        toUnits = $('#toUnits')
+        fromUnits = $('#fromUnits')
+        for k,v of Unit.instance().selectAll()
+            toUnits.append("<option value='#{k}'>#{v.name()}</option>")
+            fromUnits.append("<option value='#{k}'>#{v.name()}</option>")
 
-    convert:(p_event)->
-        console.log "FORM", p_event
+        # submit action
+        $("#conversion-form").submit(@submit)
+
+    submit:(p_event)->
         p_event.preventDefault()
+
+        data = {}
+        $(this).find('input, textarea, select').each (i, field) ->
+            data[field.name] = field.value
+
+        q = new Quantity(data.fromValue, data.fromUnit)
+        result = q.to(data.toUnit)
+
+        alert "result: #{result}"
 
 new Main()
