@@ -15,11 +15,12 @@ https://github.com/victorpotasso/physics-measurement
 
 *grunt-coffee-import*
 
-https://www.npmjs.com/package/grunt-coffee-import
-https://github.com/victorpotasso/grunt-coffee-import
++ https://www.npmjs.com/package/grunt-coffee-import
++ https://github.com/victorpotasso/grunt-coffee-import
 
 *jQuery*
-https://jquery.com/
+
++ https://jquery.com/
 
 Sample
 ---------
