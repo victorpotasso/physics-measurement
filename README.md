@@ -22,19 +22,29 @@ Sample
 ---------
 
 **Creating a quantity**
-var q = new Quantity(666, "km")
+```js
+var q = new Quantity(666, "km");
+```
 
 **Convertion a quantity unit to another**
-q.to("m")
+```js
+q.to("m");
+```
 
 **Select unit**
-Unit.instance().select("kg")
+```js
+Unit.instance().select("kg");
+```
 
 **Select All units**
-Unit.instance().selectAll()
+```js
+Unit.instance().selectAll();
+```
 
 **Select All units of a specific base quantity**
-Unit.instance().selectAllByBaseQuantity("length")
+```js
+Unit.instance().selectAllByBaseQuantity("length");
+```
 
 Quantity
 ----------
