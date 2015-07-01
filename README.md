@@ -98,3 +98,8 @@ LENGTH: "length"
 
 select(p_unitSymbol) : Unit Object - returns an `BaseQuantity` object by unit's symbol.
 selectAll() : Array - returns a list of all `BaseQuantity` objects.
+
+License
+-------
+
+[MIT ](https://github.com/victorpotasso/grunt-as3/blob/master/LICENSE-MIT)© [Victor Potasso](mailto:victorpotasso@gmail.com)
