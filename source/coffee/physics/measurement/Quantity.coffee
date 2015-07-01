@@ -19,14 +19,13 @@ class Quantity
     # conversions
 
     to:(p_unit)->
-        console.log "Convert #{@_quantity} #{@_unit} to #{p_unit}"
 
         fu = Unit.instance().select(@_unit)
         tu = Unit.instance().select(p_unit)
 
         if fu isnt null and tu isnt null
             if fu.base() is  tu.base()
-                return (@_quantity * fu.quantity()) / tu.quantity() + " " + p_unit
+                return (@_quantity * fu.quantity()) / tu.quantity() + " #{p_unit}"
             else
                 throw new Error "Quantity::to Erro: They are not the same base quantity."
         throw new Error "Quantity::to Erro: There is a null unit."

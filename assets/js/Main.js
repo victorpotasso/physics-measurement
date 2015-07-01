@@ -189,11 +189,15 @@
     }
 
     Unit.prototype._build = function() {
-      var k, v, _ref, _ref1, _ref2;
+      var k, v, _ref, _ref1, _ref2, _results;
       this._list = [];
       this._list['m'] = new Base(1, "meter", "m", BaseQuantity.LENGTH);
       this._list['s'] = new Base(1, "second", "s", BaseQuantity.TIME);
       this._list['g'] = new Base(1, "gram", "g", BaseQuantity.MASS);
+      this._list['ft'] = new Base(0.3048, "foot", "ft", BaseQuantity.LENGTH);
+      this._list['yd'] = new Base(0.9144, "yard", "yd", BaseQuantity.LENGTH);
+      this._list['in'] = new Base(0.0254, "inch", "in", BaseQuantity.LENGTH);
+      this._list['ua'] = new Base(149597870700, "astronomical unit", "ua", BaseQuantity.LENGTH);
       _ref = SIUnitPrefix.instance().selectAll();
       for (k in _ref) {
         v = _ref[k];
@@ -204,14 +208,16 @@
         v = _ref1[k];
         this._list["" + (v.symbol()) + "g"] = new Base(v.factor(), "" + (v.prefix()) + "gram", "" + (v.symbol()) + "g", BaseQuantity.MASS);
       }
+      this._list['d'] = new Base(86400, "day", "d", BaseQuantity.TIME);
       this._list['min'] = new Base(60, "minute", "min", BaseQuantity.TIME);
-      this._list['hour'] = new Base(3600, "hour", "hour", BaseQuantity.TIME);
+      this._list['h'] = new Base(3600, "hour", "h", BaseQuantity.TIME);
       _ref2 = SIUnitPrefix.instance().selectAll();
+      _results = [];
       for (k in _ref2) {
         v = _ref2[k];
-        this._list["" + (v.symbol()) + "s"] = new Base(v.factor(), "" + (v.prefix()) + "second", "" + (v.symbol()) + "s", BaseQuantity.TIME);
+        _results.push(this._list["" + (v.symbol()) + "s"] = new Base(v.factor(), "" + (v.prefix()) + "second", "" + (v.symbol()) + "s", BaseQuantity.TIME));
       }
-      return this._list['ft'] = new Base(0.3048, "foot", "ft", BaseQuantity.LENGTH);
+      return _results;
     };
 
     Unit.prototype.select = function(p_unitSymbol) {
@@ -319,12 +325,11 @@
 
     Quantity.prototype.to = function(p_unit) {
       var fu, tu;
-      console.log("Convert " + this._quantity + " " + this._unit + " to " + p_unit);
       fu = Unit.instance().select(this._unit);
       tu = Unit.instance().select(p_unit);
       if (fu !== null && tu !== null) {
         if (fu.base() === tu.base()) {
-          return (this._quantity * fu.quantity()) / tu.quantity() + " " + p_unit;
+          return (this._quantity * fu.quantity()) / tu.quantity() + (" " + p_unit);
         } else {
           throw new Error("Quantity::to Erro: They are not the same base quantity.");
         }
@@ -354,8 +359,8 @@
       _ref = Unit.instance().selectAll();
       for (k in _ref) {
         v = _ref[k];
-        toUnits.append("<option value='" + k + "'>" + (v.name()) + "</option>");
-        fromUnits.append("<option value='" + k + "'>" + (v.name()) + "</option>");
+        toUnits.append("<option value='" + k + "'>" + k + " - " + (v.name()) + "</option>");
+        fromUnits.append("<option value='" + k + "'>" + k + " - " + (v.name()) + "</option>");
       }
       return $("#conversion-form").submit(this.submit);
     };
@@ -369,7 +374,7 @@
       });
       q = new Quantity(data.fromValue, data.fromUnit);
       result = q.to(data.toUnit);
-      return $('#result').text("Result: " + data.fromValue + " " + data.fromUnit + " to " + data.toUnit + " is equal to " + result);
+      return $('#result').text("Result: " + data.fromValue + " " + data.fromUnit + " is equal to " + result);
     };
 
     return Main;

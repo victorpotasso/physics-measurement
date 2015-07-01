@@ -20,23 +20,39 @@ class Unit
         @_list['s']  = new Base(1, "second", "s", BaseQuantity.TIME)
         @_list['g']  = new Base(1, "gram", "g", BaseQuantity.MASS)
 
-        # length
+        #
+        # LENGTH
+        #
+
+        # non SI units
+        @_list['ft'] = new Base(0.3048, "foot", "ft", BaseQuantity.LENGTH)
+        @_list['yd'] = new Base(0.9144, "yard", "yd", BaseQuantity.LENGTH)
+        @_list['in'] = new Base(0.0254, "inch", "in", BaseQuantity.LENGTH)
+        @_list['ua'] = new Base(149597870700, "astronomical unit", "ua", BaseQuantity.LENGTH)
+
+        # SI
         for k,v of SIUnitPrefix.instance().selectAll()
             @_list["#{v.symbol()}m"]  = new Base(v.factor(), "#{v.prefix()}meter",  "#{v.symbol()}m", BaseQuantity.LENGTH)
 
-        # mass
+        #
+        # MASS
+        #
+
+        # SI
         for k,v of SIUnitPrefix.instance().selectAll()
             @_list["#{v.symbol()}g"]  = new Base(v.factor(), "#{v.prefix()}gram",  "#{v.symbol()}g", BaseQuantity.MASS)
 
-        # time
-        @_list['min']    = new Base(60, "minute", "min", BaseQuantity.TIME)
-        @_list['hour']  = new Base(3600, "hour", "hour", BaseQuantity.TIME)
+        #
+        # TIME
+        #
 
+        @_list['d']    = new Base(86400, "day", "d", BaseQuantity.TIME)
+        @_list['min']    = new Base(60, "minute", "min", BaseQuantity.TIME)
+        @_list['h']  = new Base(3600, "hour", "h", BaseQuantity.TIME)
+
+        # SI
         for k,v of SIUnitPrefix.instance().selectAll()
             @_list["#{v.symbol()}s"]  = new Base(v.factor(), "#{v.prefix()}second",  "#{v.symbol()}s", BaseQuantity.TIME)
-
-        # english units
-        @_list['ft'] = new Base(0.3048, "foot", "ft", BaseQuantity.LENGTH)
 
     select:(p_unitSymbol)->
         p = @_list[p_unitSymbol]

@@ -17,8 +17,8 @@ class Main
         toUnits = $('#toUnits')
         fromUnits = $('#fromUnits')
         for k,v of Unit.instance().selectAll()
-            toUnits.append("<option value='#{k}'>#{v.name()}</option>")
-            fromUnits.append("<option value='#{k}'>#{v.name()}</option>")
+            toUnits.append("<option value='#{k}'>#{k} - #{v.name()}</option>")
+            fromUnits.append("<option value='#{k}'>#{k} - #{v.name()}</option>")
 
         # submit action
         $("#conversion-form").submit(@submit)
@@ -33,6 +33,6 @@ class Main
         q = new Quantity(data.fromValue, data.fromUnit)
         result = q.to(data.toUnit)
 
-        $('#result').text("Result: #{data.fromValue} #{data.fromUnit} to #{data.toUnit} is equal to #{result}")
+        $('#result').text("Result: #{data.fromValue} #{data.fromUnit} is equal to #{result}")
 
 new Main()
