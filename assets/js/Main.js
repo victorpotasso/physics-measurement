@@ -42,13 +42,13 @@
       return this._list["yocto"] = new Base(1e-24, "yocto", "y");
     };
 
-    SIUnitPrefix.prototype.select = function(p_name) {
+    SIUnitPrefix.prototype.select = function(p_unitPrefix) {
       var p;
-      p = this._list[p_name];
+      p = this._list[p_unitPrefix];
       if (p !== null && p !== void 0) {
         return p;
       } else {
-        throw new Error("SIUnitPrefix::prefix Error: There is no prefix called '" + p_name + "'.");
+        throw new Error("SIUnitPrefix::prefix Error: There is no prefix called '" + p_unitPrefix + "'.");
       }
     };
 
@@ -123,11 +123,11 @@
 
     BaseQuantity.prototype.select = function(p_name) {
       var p;
-      p = this._list[p_name];
+      p = this._list[p_unitSymbol];
       if (p !== null && p !== void 0) {
         return p;
       } else {
-        throw new Error("Unit::prefix Error: There is no unit called '" + p_name + "'.");
+        throw new Error("Unit::prefix Error: There is no unit called '" + p_unitSymbol + "'.");
       }
     };
 
@@ -214,18 +214,31 @@
       return this._list['ft'] = new Base(0.3048, "foot", "ft", BaseQuantity.LENGTH);
     };
 
-    Unit.prototype.select = function(p_name) {
+    Unit.prototype.select = function(p_unitSymbol) {
       var p;
-      p = this._list[p_name];
+      p = this._list[p_unitSymbol];
       if (p !== null && p !== void 0) {
         return p;
       } else {
-        throw new Error("Unit::prefix Error: There is no unit called '" + p_name + "'.");
+        throw new Error("Unit::prefix Error: There is no unit called '" + p_unitSymbol + "'.");
       }
     };
 
     Unit.prototype.selectAll = function() {
       return this._list;
+    };
+
+    Unit.prototype.selectAllByBaseQuantity = function(p_baseQuantity) {
+      var a, k, v, _ref;
+      a = [];
+      _ref = this._list;
+      for (k in _ref) {
+        v = _ref[k];
+        if (v.base() === p_baseQuantity) {
+          a[k] = v;
+        }
+      }
+      return a;
     };
 
     Unit.prototype.isValid = function(p_unit) {
@@ -335,6 +348,7 @@
 
     Main.prototype._build = function() {
       var fromUnits, k, toUnits, v, _ref;
+      console.log(Unit.instance().selectAllByBaseQuantity("length"));
       toUnits = $('#toUnits');
       fromUnits = $('#fromUnits');
       _ref = Unit.instance().selectAll();

@@ -30,9 +30,9 @@ class SIUnitPrefix
         @_list["zepto"] =  new Base(1e-21, "zepto", "z")
         @_list["yocto"] =  new Base(1e-24, "yocto", "y")
 
-    select:(p_name)->
-        p = @_list[p_name]
-        return if p isnt null and p isnt undefined then p else throw new Error("SIUnitPrefix::prefix Error: There is no prefix called '#{p_name}'.")
+    select:(p_unitPrefix)->
+        p = @_list[p_unitPrefix]
+        return if p isnt null and p isnt undefined then p else throw new Error("SIUnitPrefix::prefix Error: There is no prefix called '#{p_unitPrefix}'.")
 
     selectAll:()->
         return @_list

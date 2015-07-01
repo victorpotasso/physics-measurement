@@ -11,6 +11,8 @@ class Main
 
     _build:()->
 
+        console.log Unit.instance().selectAllByBaseQuantity("length")
+
         # fill select inputs
         toUnits = $('#toUnits')
         fromUnits = $('#fromUnits')

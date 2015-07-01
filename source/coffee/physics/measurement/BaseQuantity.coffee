@@ -20,8 +20,8 @@ class BaseQuantity
         @_list["g"] = new Base(BaseQuantity.MASS,      Unit.instance().select('g'))
 
     select:(p_name)->
-        p = @_list[p_name]
-        return if p isnt null and p isnt undefined then p else throw new Error("Unit::prefix Error: There is no unit called '#{p_name}'.")
+        p = @_list[p_unitSymbol]
+        return if p isnt null and p isnt undefined then p else throw new Error("Unit::prefix Error: There is no unit called '#{p_unitSymbol}'.")
 
     selectAll:()->
         return @_list

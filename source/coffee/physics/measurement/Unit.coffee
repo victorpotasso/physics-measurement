@@ -38,12 +38,18 @@ class Unit
         # english units
         @_list['ft'] = new Base(0.3048, "foot", "ft", BaseQuantity.LENGTH)
 
-    select:(p_name)->
-        p = @_list[p_name]
-        return if p isnt null and p isnt undefined then p else throw new Error("Unit::prefix Error: There is no unit called '#{p_name}'.")
+    select:(p_unitSymbol)->
+        p = @_list[p_unitSymbol]
+        return if p isnt null and p isnt undefined then p else throw new Error("Unit::prefix Error: There is no unit called '#{p_unitSymbol}'.")
 
     selectAll:()->
         return @_list
+
+    selectAllByBaseQuantity:(p_baseQuantity)->
+        a = []
+        for k,v of @_list
+            if v.base() is p_baseQuantity then a[k] = v
+        return a
 
     isValid:(p_unit)->
         return if @_list[p_unit] then true else false
