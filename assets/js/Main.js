@@ -203,6 +203,9 @@
         v = _ref[k];
         this._list["" + (v.symbol()) + "m"] = new Base(v.factor(), "" + (v.prefix()) + "meter", "" + (v.symbol()) + "m", BaseQuantity.LENGTH);
       }
+      this._list['lb'] = new Base(453.59237, "pound", "lb", BaseQuantity.MASS);
+      this._list['oz'] = new Base(28.3495231, "ounces", "oz", BaseQuantity.MASS);
+      this._list['u'] = new Base(6.02214129 * 1e+23, "atomic mass", "u", BaseQuantity.MASS);
       _ref1 = SIUnitPrefix.instance().selectAll();
       for (k in _ref1) {
         v = _ref1[k];

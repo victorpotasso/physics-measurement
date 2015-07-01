@@ -38,6 +38,11 @@ class Unit
         # MASS
         #
 
+        # non SI units
+        @_list['lb'] = new Base(453.59237, "pound", "lb", BaseQuantity.MASS)
+        @_list['oz'] = new Base(28.3495231, "ounces", "oz", BaseQuantity.MASS)
+        @_list['u'] = new Base(6.02214129 * 1e+23, "atomic mass", "u", BaseQuantity.MASS)
+
         # SI
         for k,v of SIUnitPrefix.instance().selectAll()
             @_list["#{v.symbol()}g"]  = new Base(v.factor(), "#{v.prefix()}gram",  "#{v.symbol()}g", BaseQuantity.MASS)
@@ -46,6 +51,7 @@ class Unit
         # TIME
         #
 
+        # non SI units
         @_list['d']    = new Base(86400, "day", "d", BaseQuantity.TIME)
         @_list['min']    = new Base(60, "minute", "min", BaseQuantity.TIME)
         @_list['h']  = new Base(3600, "hour", "h", BaseQuantity.TIME)
