@@ -3,15 +3,18 @@ Physics Measurement
 
 *This library will support you to measure the quantities involved in physics. Among these quantities are length, time, mass, temperature, pressure, and electric current.*
 
-Github:
+**Github:**
+
 https://github.com/victorpotasso/physics-measurement
 
-Email:
+**Email:**
+
 [victorpotasso@gmail.com](mailto:victorpotasso@gmail.com)
 
-Dependences:
+**Dependences:**
 
 *grunt-coffee-import*
+
 https://www.npmjs.com/package/grunt-coffee-import
 https://github.com/victorpotasso/grunt-coffee-import
 
