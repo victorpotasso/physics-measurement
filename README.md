@@ -52,6 +52,7 @@ Quantity
 **Property**
 
 _quantity : Number Unit's quantity
+
 _unit : String `Unit` class that represents this Quantity
 
 **Functions**
@@ -67,6 +68,7 @@ Unit
 **Property**
 
 _quantity : Number Unit's quantity
+
 _unit : String `Unit` class that represents this Quantity
 
 **Functions**
@@ -91,7 +93,9 @@ BaseQuantity
 **Variables**
 
 MASS: "mass"
+
 TIME: "time"
+
 LENGTH: "length"
 
 **Functions**
